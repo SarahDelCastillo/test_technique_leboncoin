@@ -39,6 +39,24 @@ final class CachedImageDataLoaderTests: XCTestCase {
         XCTAssertNil(result)
     }
 
+    func test_loadFromURLLoadsFromCacheIfThereIsOne() async {
+        let sut = makeSUT()
+        let url = anyURL()
+        let data = anyData()
+
+        MockHTTPClient.data = data
+
+        _ = await sut.load(from: url)
+        XCTAssert(MockHTTPClient.receivedMessages.count == 1)
+
+        // Reset client data
+        MockHTTPClient.data = Data()
+        
+        let result = await sut.load(from: url)
+        XCTAssert(MockHTTPClient.receivedMessages.count == 1)
+        XCTAssertEqual(result, data)
+    }
+
     func makeSUT() -> CachedImageDataLoader {
         let httpClient = MockHTTPClient()
         let sut = CachedImageDataLoader(httpClient: httpClient)
@@ -48,6 +66,11 @@ final class CachedImageDataLoaderTests: XCTestCase {
 }
 
 final class MockHTTPClient: HTTPClient {
+    enum Message {
+        case getFromURL
+    }
+
+    static var receivedMessages = [Message]()
     static var data = Data()
     static var response = HTTPURLResponse()
     static var error: NSError?
@@ -58,10 +81,11 @@ final class MockHTTPClient: HTTPClient {
     }
 
     func get(from url: URL) async throws -> (Data, URLResponse) {
+        Self.receivedMessages.append(.getFromURL)
         if let error = Self.error {
             throw error
         } else {
-            (Self.data, Self.response)
+            return (Self.data, Self.response)
         }
     }
 }

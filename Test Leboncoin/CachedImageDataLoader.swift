@@ -8,7 +8,7 @@
 import UIKit
 
 final class CachedImageDataLoader {
-    private let cache = [URL: UIImage]()
+    private var cache = [URL: Data]()
     let httpClient: HTTPClient
 
     init(httpClient: HTTPClient) {
@@ -16,8 +16,13 @@ final class CachedImageDataLoader {
     }
 
     func load(from url: URL) async -> Data? {
+        if let data = cache[url] {
+            return data
+        }
+
         do {
             let (data, _) = try await httpClient.get(from: url)
+            cache[url] = data
             return data
         } catch {
             return nil
