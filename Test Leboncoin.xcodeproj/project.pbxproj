@@ -15,6 +15,8 @@
 		26C9E2452B5BE9E5009CAD4C /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2442B5BE9E5009CAD4C /* ListItem.swift */; };
 		26C9E2472B5BEC08009CAD4C /* ListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */; };
 		26C9E2492B5BED05009CAD4C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2482B5BED05009CAD4C /* UIView.swift */; };
+		26C9E2542B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2532B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift */; };
+		26C9E2562B5D1B4C009CAD4C /* CachedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2552B5D1B4C009CAD4C /* CachedImageDataLoader.swift */; };
 		26C9E2582B5D1BB2009CAD4C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2572B5D1BB2009CAD4C /* HTTPClient.swift */; };
 		26C9E25A2B5D1C62009CAD4C /* URSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2592B5D1C62009CAD4C /* URSessionHTTPClient.swift */; };
 		26C9E25C2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */; };
@@ -45,6 +47,8 @@
 		26C9E2442B5BE9E5009CAD4C /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemCell.swift; sourceTree = "<group>"; };
 		26C9E2482B5BED05009CAD4C /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		26C9E2532B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageDataLoaderTests.swift; sourceTree = "<group>"; };
+		26C9E2552B5D1B4C009CAD4C /* CachedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageDataLoader.swift; sourceTree = "<group>"; };
 		26C9E2572B5D1BB2009CAD4C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		26C9E2592B5D1C62009CAD4C /* URSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URSessionHTTPClient.swift; sourceTree = "<group>"; };
 		26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 				26C9E21D2B594E34009CAD4C /* Assets.xcassets */,
 				26C9E21F2B594E34009CAD4C /* LaunchScreen.storyboard */,
 				26C9E2222B594E34009CAD4C /* Info.plist */,
+				26C9E2552B5D1B4C009CAD4C /* CachedImageDataLoader.swift */,
 				26C9E2572B5D1BB2009CAD4C /* HTTPClient.swift */,
 				26C9E2592B5D1C62009CAD4C /* URSessionHTTPClient.swift */,
 			);
@@ -110,6 +115,7 @@
 		26C9E22A2B594E34009CAD4C /* Test LeboncoinTests */ = {
 			isa = PBXGroup;
 			children = (
+				26C9E2532B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift */,
 				26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */,
 				26C9E25F2B5D21C4009CAD4C /* Helpers */,
 			);
@@ -245,6 +251,7 @@
 			files = (
 				26C9E2452B5BE9E5009CAD4C /* ListItem.swift in Sources */,
 				26C9E2192B594E30009CAD4C /* HomeViewController.swift in Sources */,
+				26C9E2562B5D1B4C009CAD4C /* CachedImageDataLoader.swift in Sources */,
 				26C9E2152B594E30009CAD4C /* AppDelegate.swift in Sources */,
 				26C9E2582B5D1BB2009CAD4C /* HTTPClient.swift in Sources */,
 				26C9E2472B5BEC08009CAD4C /* ListItemCell.swift in Sources */,
@@ -260,6 +267,7 @@
 			files = (
 				26C9E2612B5D22F2009CAD4C /* MemoryLeakTracking.swift in Sources */,
 				26C9E2632B5D26B1009CAD4C /* TestHelpers.swift in Sources */,
+				26C9E2542B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift in Sources */,
 				26C9E25E2B5D21BE009CAD4C /* URLProtocolStub.swift in Sources */,
 				26C9E25C2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift in Sources */,
 			);
