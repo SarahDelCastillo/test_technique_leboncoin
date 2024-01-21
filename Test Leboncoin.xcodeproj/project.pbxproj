@@ -31,6 +31,7 @@
 		26C9E2722B5D8977009CAD4C /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2712B5D8977009CAD4C /* FeedLoader.swift */; };
 		26C9E2752B5D9452009CAD4C /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2742B5D9452009CAD4C /* PlistHelper.swift */; };
 		26C9E2772B5D9536009CAD4C /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2762B5D9536009CAD4C /* Bundle.swift */; };
+		26C9E2792B5DB0B2009CAD4C /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		26C9E2732B5D923C009CAD4C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		26C9E2742B5D9452009CAD4C /* PlistHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		26C9E2762B5D9536009CAD4C /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				26C9E24A2B5C0BE3009CAD4C /* Models */,
 				26C9E26B2B5D7CA8009CAD4C /* Networking */,
 				26C9E2182B594E30009CAD4C /* HomeViewController.swift */,
+				26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */,
 				26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */,
 				26C9E21D2B594E34009CAD4C /* Assets.xcassets */,
 				26C9E21F2B594E34009CAD4C /* LaunchScreen.storyboard */,
@@ -322,6 +325,7 @@
 				26C9E25A2B5D1C62009CAD4C /* URSessionHTTPClient.swift in Sources */,
 				26C9E2772B5D9536009CAD4C /* Bundle.swift in Sources */,
 				26C9E2692B5D77C6009CAD4C /* UIView.swift in Sources */,
+				26C9E2792B5DB0B2009CAD4C /* CategoriesList.swift in Sources */,
 				26C9E2672B5D7775009CAD4C /* AsyncUIImageView.swift in Sources */,
 				26C9E2172B594E30009CAD4C /* SceneDelegate.swift in Sources */,
 			);
