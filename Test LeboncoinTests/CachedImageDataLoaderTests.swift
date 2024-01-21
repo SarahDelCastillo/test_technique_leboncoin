@@ -17,9 +17,31 @@ final class CachedImageDataLoaderTests: XCTestCase {
         XCTAssertNil(result)
     }
 
-    func makeSUT() -> CachedImageLoader {
+    func test_loadFromURLReturnsLoadedData() async {
+        let sut = makeSUT()
+        let url = anyURL()
+        let testData = anyData()
+
+        MockHTTPClient.data = testData
+
+        let result = await sut.load(from: url)
+        XCTAssertEqual(result, testData)
+    }
+
+    func test_loadFromURLReturnsNilOnClientError() async {
+        let sut = makeSUT()
+        let url = anyURL()
+        let error = anyError()
+
+        MockHTTPClient.error = error
+
+        let result = await sut.load(from: url)
+        XCTAssertNil(result)
+    }
+
+    func makeSUT() -> CachedImageDataLoader {
         let httpClient = MockHTTPClient()
-        let sut = CachedImageLoader(httpClient: httpClient)
+        let sut = CachedImageDataLoader(httpClient: httpClient)
         trackForMemoryLeaks(sut, file: #file, line: #line)
         return sut
     }
@@ -28,6 +50,7 @@ final class CachedImageDataLoaderTests: XCTestCase {
 final class MockHTTPClient: HTTPClient {
     static var data = Data()
     static var response = HTTPURLResponse()
+    static var error: NSError?
 
     static func setupWith(data: Data, response: HTTPURLResponse) {
         self.data = data
@@ -35,6 +58,10 @@ final class MockHTTPClient: HTTPClient {
     }
 
     func get(from url: URL) async throws -> (Data, URLResponse) {
-        (Self.data, Self.response)
+        if let error = Self.error {
+            throw error
+        } else {
+            (Self.data, Self.response)
+        }
     }
 }

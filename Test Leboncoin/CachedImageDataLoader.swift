@@ -16,6 +16,11 @@ final class CachedImageDataLoader {
     }
 
     func load(from url: URL) async -> Data? {
-        nil
+        do {
+            let (data, _) = try await httpClient.get(from: url)
+            return data
+        } catch {
+            return nil
+        }
     }
 }
