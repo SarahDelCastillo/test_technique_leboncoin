@@ -19,5 +19,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>API_ITEMS_URL</key>
+	<string>https://$(API_ITEMS_URL)</string>
+	<key>CATEGORIES_URL</key>
+	<string>https://$(CATEGORIES_URL)</string>
 </dict>
 </plist>
