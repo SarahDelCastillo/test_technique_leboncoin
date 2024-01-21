@@ -20,6 +20,7 @@
 		26C9E25C2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */; };
 		26C9E25E2B5D21BE009CAD4C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E25D2B5D21BE009CAD4C /* URLProtocolStub.swift */; };
 		26C9E2612B5D22F2009CAD4C /* MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2602B5D22F2009CAD4C /* MemoryLeakTracking.swift */; };
+		26C9E2632B5D26B1009CAD4C /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2622B5D26B1009CAD4C /* TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		26C9E25D2B5D21BE009CAD4C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		26C9E2602B5D22F2009CAD4C /* MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeakTracking.swift; sourceTree = "<group>"; };
+		26C9E2622B5D26B1009CAD4C /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				26C9E25D2B5D21BE009CAD4C /* URLProtocolStub.swift */,
 				26C9E2602B5D22F2009CAD4C /* MemoryLeakTracking.swift */,
+				26C9E2622B5D26B1009CAD4C /* TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26C9E2612B5D22F2009CAD4C /* MemoryLeakTracking.swift in Sources */,
+				26C9E2632B5D26B1009CAD4C /* TestHelpers.swift in Sources */,
 				26C9E25E2B5D21BE009CAD4C /* URLProtocolStub.swift in Sources */,
 				26C9E25C2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift in Sources */,
 			);

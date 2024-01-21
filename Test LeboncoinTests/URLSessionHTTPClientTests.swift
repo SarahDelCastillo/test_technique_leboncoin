@@ -9,9 +9,38 @@ import XCTest
 @testable import Test_Leboncoin
 
 final class URLSessionHTTPClientTests: XCTestCase {
+    override class func tearDown() {
+        super.tearDown()
+        URLProtocolStub.removeStub()
+    }
 
-    func test_canInit() {
-        _ = makeSUT()
+    func test_getFromURL_performsGETRequestWithURL() async throws {
+        let sut = makeSUT()
+        let url = anyURL()
+
+        URLProtocolStub.observeRequests { request in
+            XCTAssertEqual(request.url, url)
+            XCTAssertEqual(request.httpMethod, "GET")
+        }
+
+        _ = try await sut.get(from: url)
+    }
+
+    func test_getFromURL_failsOnRequestError() async {
+        let sut = makeSUT()
+        let url = anyURL()
+        let testError = anyError()
+
+        URLProtocolStub.stub(data: nil, response: nil, error: testError)
+
+        do {
+            _ = try await sut.get(from: url)
+            XCTFail("Should have failed with error.")
+        } catch {
+            let receivedError = error as NSError
+            XCTAssertEqual(receivedError.code, testError.code
+            )
+        }
     }
 
     private func makeSUT() -> HTTPClient {
