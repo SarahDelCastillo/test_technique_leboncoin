@@ -12,10 +12,14 @@
 		26C9E2192B594E30009CAD4C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2182B594E30009CAD4C /* HomeViewController.swift */; };
 		26C9E21E2B594E34009CAD4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26C9E21D2B594E34009CAD4C /* Assets.xcassets */; };
 		26C9E2212B594E34009CAD4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26C9E21F2B594E34009CAD4C /* LaunchScreen.storyboard */; };
-		26C9E22C2B594E34009CAD4C /* Test_LeboncoinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E22B2B594E34009CAD4C /* Test_LeboncoinTests.swift */; };
 		26C9E2452B5BE9E5009CAD4C /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2442B5BE9E5009CAD4C /* ListItem.swift */; };
 		26C9E2472B5BEC08009CAD4C /* ListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */; };
 		26C9E2492B5BED05009CAD4C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2482B5BED05009CAD4C /* UIView.swift */; };
+		26C9E2582B5D1BB2009CAD4C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2572B5D1BB2009CAD4C /* HTTPClient.swift */; };
+		26C9E25A2B5D1C62009CAD4C /* URSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2592B5D1C62009CAD4C /* URSessionHTTPClient.swift */; };
+		26C9E25C2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */; };
+		26C9E25E2B5D21BE009CAD4C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E25D2B5D21BE009CAD4C /* URLProtocolStub.swift */; };
+		26C9E2612B5D22F2009CAD4C /* MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2602B5D22F2009CAD4C /* MemoryLeakTracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,10 +41,14 @@
 		26C9E2202B594E34009CAD4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26C9E2222B594E34009CAD4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26C9E2272B594E34009CAD4C /* Test LeboncoinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test LeboncoinTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		26C9E22B2B594E34009CAD4C /* Test_LeboncoinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_LeboncoinTests.swift; sourceTree = "<group>"; };
 		26C9E2442B5BE9E5009CAD4C /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemCell.swift; sourceTree = "<group>"; };
 		26C9E2482B5BED05009CAD4C /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		26C9E2572B5D1BB2009CAD4C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		26C9E2592B5D1C62009CAD4C /* URSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URSessionHTTPClient.swift; sourceTree = "<group>"; };
+		26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		26C9E25D2B5D21BE009CAD4C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		26C9E2602B5D22F2009CAD4C /* MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeakTracking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +99,8 @@
 				26C9E21D2B594E34009CAD4C /* Assets.xcassets */,
 				26C9E21F2B594E34009CAD4C /* LaunchScreen.storyboard */,
 				26C9E2222B594E34009CAD4C /* Info.plist */,
+				26C9E2572B5D1BB2009CAD4C /* HTTPClient.swift */,
+				26C9E2592B5D1C62009CAD4C /* URSessionHTTPClient.swift */,
 			);
 			path = "Test Leboncoin";
 			sourceTree = "<group>";
@@ -98,7 +108,8 @@
 		26C9E22A2B594E34009CAD4C /* Test LeboncoinTests */ = {
 			isa = PBXGroup;
 			children = (
-				26C9E22B2B594E34009CAD4C /* Test_LeboncoinTests.swift */,
+				26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */,
+				26C9E25F2B5D21C4009CAD4C /* Helpers */,
 			);
 			path = "Test LeboncoinTests";
 			sourceTree = "<group>";
@@ -117,6 +128,15 @@
 				26C9E2482B5BED05009CAD4C /* UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		26C9E25F2B5D21C4009CAD4C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				26C9E25D2B5D21BE009CAD4C /* URLProtocolStub.swift */,
+				26C9E2602B5D22F2009CAD4C /* MemoryLeakTracking.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +192,7 @@
 					};
 					26C9E2262B594E34009CAD4C = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 						TestTargetID = 26C9E2102B594E30009CAD4C;
 					};
 				};
@@ -222,8 +243,10 @@
 				26C9E2452B5BE9E5009CAD4C /* ListItem.swift in Sources */,
 				26C9E2192B594E30009CAD4C /* HomeViewController.swift in Sources */,
 				26C9E2152B594E30009CAD4C /* AppDelegate.swift in Sources */,
+				26C9E2582B5D1BB2009CAD4C /* HTTPClient.swift in Sources */,
 				26C9E2472B5BEC08009CAD4C /* ListItemCell.swift in Sources */,
 				26C9E2492B5BED05009CAD4C /* UIView.swift in Sources */,
+				26C9E25A2B5D1C62009CAD4C /* URSessionHTTPClient.swift in Sources */,
 				26C9E2172B594E30009CAD4C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,7 +255,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26C9E22C2B594E34009CAD4C /* Test_LeboncoinTests.swift in Sources */,
+				26C9E2612B5D22F2009CAD4C /* MemoryLeakTracking.swift in Sources */,
+				26C9E25E2B5D21BE009CAD4C /* URLProtocolStub.swift in Sources */,
+				26C9E25C2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
