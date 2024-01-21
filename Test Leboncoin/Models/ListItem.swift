@@ -9,7 +9,7 @@ import Foundation
 
 struct ListItem {
     let title: String
-    let image: URL
+    let image: URL?
     let category: String
     let price: Double
     let urgent: Bool

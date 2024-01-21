@@ -9,11 +9,13 @@ import UIKit
 
 final class ListItemCell: UITableViewCell {
 
-    private var image = UIImageView(forAutoLayout: true)
+    private var asyncImageView = AsyncUIImageView(forAutoLayout: true)
     private var titleLabel = UILabel(forAutoLayout: true)
     private var priceLabel = UILabel(forAutoLayout: true)
     private var categoryLabel = UILabel(forAutoLayout: true)
     private var urgentLabel = UILabel(forAutoLayout: true)
+
+    private var imageLoadingTask: Task<Void, Error>?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,11 +27,21 @@ final class ListItemCell: UITableViewCell {
         setupTitleLabel()
     }
 
+    override func prepareForReuse() {
+        asyncImageView.image = nil
+        imageLoadingTask?.cancel()
+    }
+
     func setupContent(with item: ListItem) {
         titleLabel.text = item.title
         priceLabel.text = formattedPrice(price: item.price)
         categoryLabel.text = item.category
         urgentLabel.isHidden = !item.urgent
+        if let imageURL = item.image {
+            imageLoadingTask = asyncImageView.load(from: imageURL)
+        } else {
+            asyncImageView.image = UIImage(named: "placeholder")
+        }
     }
 
     private func formattedPrice(price: Double) -> String {
@@ -44,20 +56,18 @@ final class ListItemCell: UITableViewCell {
     }
 
     private func setupImageView() {
-        contentView.addSubview(image)
+        contentView.addSubview(asyncImageView)
+        asyncImageView.layer.cornerRadius = 10
+        asyncImageView.clipsToBounds = true
+        asyncImageView.contentMode = .scaleAspectFill
 
-        image.image = UIImage(named: "placeholder") // TODO: Load image from URL
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
-
-        let aspectRatio = NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: image, attribute: .height, multiplier: 2, constant: 0)
-        image.addConstraint(aspectRatio)
+        let aspectRatio = NSLayoutConstraint(item: asyncImageView, attribute: .width, relatedBy: .equal, toItem: asyncImageView, attribute: .height, multiplier: 2, constant: 0)
+        asyncImageView.addConstraint(aspectRatio)
 
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -16),
+            asyncImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            asyncImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            asyncImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -16),
 
         ])
     }
@@ -67,7 +77,7 @@ final class ListItemCell: UITableViewCell {
         priceLabel.font = .systemFont(ofSize: 16, weight: .medium)
 
         NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8),
+            priceLabel.topAnchor.constraint(equalTo: asyncImageView.bottomAnchor, constant: 8),
             priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
         ])
     }
@@ -89,7 +99,7 @@ final class ListItemCell: UITableViewCell {
         priceLabel.font = .systemFont(ofSize: 16, weight: .medium)
 
         NSLayoutConstraint.activate([
-            categoryLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 8),
+            categoryLabel.topAnchor.constraint(equalTo: asyncImageView.bottomAnchor, constant: 8),
             categoryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
@@ -105,8 +115,8 @@ final class ListItemCell: UITableViewCell {
         urgentLabel.font = .systemFont(ofSize: 14, weight: .medium)
 
         NSLayoutConstraint.activate([
-            urgentLabel.topAnchor.constraint(equalTo: image.topAnchor, constant: 8),
-            urgentLabel.leadingAnchor.constraint(equalTo: image.leadingAnchor, constant: 8),
+            urgentLabel.topAnchor.constraint(equalTo: asyncImageView.topAnchor, constant: 8),
+            urgentLabel.leadingAnchor.constraint(equalTo: asyncImageView.leadingAnchor, constant: 8),
         ])
     }
 
