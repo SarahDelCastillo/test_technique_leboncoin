@@ -61,6 +61,21 @@ final class URLSessionHTTPClientTests: XCTestCase {
         }
     }
 
+    func test_getFromURLReturnsEmptyDataOnResponseWithNilData() async {
+        let sut = makeSUT()
+        let url = anyURL()
+        let emptyData = Data()
+
+        URLProtocolStub.stub(data: nil, response: nil, error: nil)
+
+        do {
+            let (data, _) = try await sut.get(from: url)
+            XCTAssertEqual(data, emptyData)
+        } catch {
+            XCTFail("Should not have failed.")
+        }
+    }
+
     private func makeSUT() -> HTTPClient {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [URLProtocolStub.self]
