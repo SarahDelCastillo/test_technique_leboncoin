@@ -11,17 +11,37 @@ final class FeedLoader {
     private let categoryLoader: CategoryLoader
     private let apiItemLoader: APIItemLoader
 
+    private var apiItems = [APIItem]()
+    private var categories = [Category]()
+
     init() {
         let client = URLSessionHTTPClient(session: .shared)
         self.categoryLoader = CategoryLoader(client: client)
         self.apiItemLoader = APIItemLoader(client: client)
     }
 
-    func loadItems() async -> [ListItem] {
-        async let categories = categoryLoader.loadData()
-        async let items = apiItemLoader.loadData()
+    func loadWithFilter(categoryId: Int?) async -> ([ListItem], [Category]) {
+        async let apiItems = await loadAPIItems()
+        async let categories = await loadCategories()
 
-        return await mapToListItem(items: items, categories: categories)
+        guard let categoryId = categoryId else {
+            return await (mapToListItem(items: apiItems, categories: categories), categories)
+        }
+
+        let filteredItems = await apiItems.filter {
+                $0.categoryId == categoryId
+        }
+        return await (mapToListItem(items: filteredItems, categories: categories), categories)
+    }
+
+    private func loadAPIItems() async -> [APIItem] {
+        apiItems = apiItems.isEmpty ? await apiItemLoader.loadData() : apiItems
+        return apiItems
+    }
+
+    private func loadCategories() async -> [Category] {
+        categories = categories.isEmpty ? await categoryLoader.loadData() : categories
+        return categories
     }
 
     private func mapToListItem(items: [APIItem], categories: [Category]) -> [ListItem] {
