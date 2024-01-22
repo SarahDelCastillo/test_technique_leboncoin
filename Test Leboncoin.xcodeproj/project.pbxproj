@@ -32,6 +32,7 @@
 		26C9E2752B5D9452009CAD4C /* PlistHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2742B5D9452009CAD4C /* PlistHelper.swift */; };
 		26C9E2772B5D9536009CAD4C /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2762B5D9536009CAD4C /* Bundle.swift */; };
 		26C9E2792B5DB0B2009CAD4C /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */; };
+		26C9E27B2B5DB0E7009CAD4C /* HomeViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		26C9E2742B5D9452009CAD4C /* PlistHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistHelper.swift; sourceTree = "<group>"; };
 		26C9E2762B5D9536009CAD4C /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
+		26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+TableView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				26C9E24A2B5C0BE3009CAD4C /* Models */,
 				26C9E26B2B5D7CA8009CAD4C /* Networking */,
 				26C9E2182B594E30009CAD4C /* HomeViewController.swift */,
+				26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */,
 				26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */,
 				26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */,
 				26C9E21D2B594E34009CAD4C /* Assets.xcassets */,
@@ -328,6 +331,7 @@
 				26C9E2792B5DB0B2009CAD4C /* CategoriesList.swift in Sources */,
 				26C9E2672B5D7775009CAD4C /* AsyncUIImageView.swift in Sources */,
 				26C9E2172B594E30009CAD4C /* SceneDelegate.swift in Sources */,
+				26C9E27B2B5DB0E7009CAD4C /* HomeViewController+TableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

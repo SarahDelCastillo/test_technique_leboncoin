@@ -7,13 +7,74 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UITableViewController {
+    private(set) var items = [ListItem]()
+
+    private var feedLoader: FeedLoader?
+    private var categories = [Category]()
+    private var currentFilter: Int? {
+        didSet {
+            Task {
+                await loadIntoTableView()
+            }
+        }
+    }
+    private lazy var filterButton = {
+        UIBarButtonItem(title: "Catégories", style: .plain, target: self, action: #selector(presentCategoriesSheet))
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.feedLoader = FeedLoader()
+
+        setupTableView()
+        setupRefreshControl()
+
+        navigationItem.rightBarButtonItem = filterButton
+        Task {
+            await self.loadIntoTableView()
+        }
     }
 
+    private func loadIntoTableView() async {
+        if let (items, categories) = await feedLoader?.loadWithFilter(categoryId: currentFilter) {
+            self.items = items
+            self.categories = categories
+            tableView?.reloadData()
+        }
+    }
 
+    private func setupTableView() {
+        tableView.register(ListItemCell.self, forCellReuseIdentifier: "itemCell")
+        tableView.separatorStyle = .none
+    }
+
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+
+    @objc private func refresh() {
+        Task {
+            await loadIntoTableView()
+            refreshControl?.endRefreshing()
+        }
+    }
+
+    @objc private func presentCategoriesSheet() {
+        let vc = CategoriesList()
+        vc.loadCategories = { [weak self] in
+            self?.categories ?? []
+        }
+        vc.didSelectCategory = { [weak self] categoryId in
+            self?.currentFilter = categoryId
+        }
+        vc.modalPresentationStyle = .automatic
+        present(vc, animated: true)
+    }
 }
 
+@available(iOS 17, *)
+#Preview {
+    UINavigationController(rootViewController: HomeViewController())
+}
