@@ -119,19 +119,15 @@
 			children = (
 				26C9E2142B594E30009CAD4C /* AppDelegate.swift */,
 				26C9E2162B594E30009CAD4C /* SceneDelegate.swift */,
-				26C9E26A2B5D7ADD009CAD4C /* Components */,
 				26C9E24B2B5C0C38009CAD4C /* Extensions */,
+				26C9E2802B5E71CA009CAD4C /* Helpers */,
 				26C9E24A2B5C0BE3009CAD4C /* Models */,
 				26C9E26B2B5D7CA8009CAD4C /* Networking */,
-				26C9E2182B594E30009CAD4C /* HomeViewController.swift */,
-				26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */,
-				26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */,
-				26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */,
+				26C9E27F2B5E7191009CAD4C /* UI */,
 				26C9E21D2B594E34009CAD4C /* Assets.xcassets */,
 				26C9E21F2B594E34009CAD4C /* LaunchScreen.storyboard */,
 				26C9E2222B594E34009CAD4C /* Info.plist */,
 				26C9E2732B5D923C009CAD4C /* Config.xcconfig */,
-				26C9E2742B5D9452009CAD4C /* PlistHelper.swift */,
 			);
 			path = "Test Leboncoin";
 			sourceTree = "<group>";
@@ -210,6 +206,34 @@
 				26C9E2712B5D8977009CAD4C /* FeedLoader.swift */,
 			);
 			path = "Data loaders";
+			sourceTree = "<group>";
+		};
+		26C9E27E2B5E7174009CAD4C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				26C9E2182B594E30009CAD4C /* HomeViewController.swift */,
+				26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */,
+				26C9E2462B5BEC08009CAD4C /* ListItemCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		26C9E27F2B5E7191009CAD4C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				26C9E26A2B5D7ADD009CAD4C /* Components */,
+				26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */,
+				26C9E27E2B5E7174009CAD4C /* Home */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		26C9E2802B5E71CA009CAD4C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				26C9E2742B5D9452009CAD4C /* PlistHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
