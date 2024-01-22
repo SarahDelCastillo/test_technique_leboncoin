@@ -10,6 +10,7 @@ import Foundation
 struct ListItem {
     let title: String
     let description: String
+    let date: String
     let image: URL?
     let category: String
     let price: Double

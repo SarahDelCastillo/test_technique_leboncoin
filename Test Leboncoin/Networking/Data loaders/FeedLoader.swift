@@ -33,9 +33,15 @@ final class FeedLoader {
             }
 
             let category = categories.first { $0.id == item.categoryId }?.name ?? "Inconnue"
+            let dateString: String = if let date = item.creationDateExtracted {
+                DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .short)
+            } else {
+                ""
+            }
 
             return .init(title: item.title,
                          description: item.description,
+                         date: dateString,
                          image: imageURL,
                          category: category,
                          price: item.price,

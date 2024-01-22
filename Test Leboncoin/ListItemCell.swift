@@ -12,6 +12,7 @@ final class ListItemCell: UITableViewCell {
     private var asyncImageView = AsyncUIImageView(forAutoLayout: true)
     private var titleLabel = UILabel(forAutoLayout: true)
     private var priceLabel = UILabel(forAutoLayout: true)
+    private var dateLabel = UILabel(forAutoLayout: true)
     private var categoryLabel = UILabel(forAutoLayout: true)
     private var urgentLabel = UILabel(forAutoLayout: true)
 
@@ -25,6 +26,7 @@ final class ListItemCell: UITableViewCell {
         setupPriceLabel()
         setupCategoryLabel()
         setupTitleLabel()
+        setupDateLabel()
     }
 
     override func prepareForReuse() {
@@ -37,6 +39,7 @@ final class ListItemCell: UITableViewCell {
         priceLabel.text = formattedPrice(price: item.price)
         categoryLabel.text = item.category
         urgentLabel.isHidden = !item.urgent
+        dateLabel.text = item.date
         if let imageURL = item.image {
             imageLoadingTask = asyncImageView.load(from: imageURL)
         } else {
@@ -82,6 +85,17 @@ final class ListItemCell: UITableViewCell {
         ])
     }
 
+    private func setupDateLabel() {
+        contentView.addSubview(dateLabel)
+        dateLabel.font = .systemFont(ofSize: 14, weight: .light)
+
+        NSLayoutConstraint.activate([
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
+    }
+
     private func setupTitleLabel() {
         contentView.addSubview(titleLabel)
         titleLabel.font = .systemFont(ofSize: 14, weight: .light)
@@ -89,8 +103,7 @@ final class ListItemCell: UITableViewCell {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
 
