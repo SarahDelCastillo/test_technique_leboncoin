@@ -34,6 +34,7 @@
 		26C9E2792B5DB0B2009CAD4C /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */; };
 		26C9E27B2B5DB0E7009CAD4C /* HomeViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */; };
 		26C9E2822B5E723F009CAD4C /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2812B5E723F009CAD4C /* ItemDetailViewController.swift */; };
+		26C9E2842B5E83F3009CAD4C /* ItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2832B5E83F3009CAD4C /* ItemImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		26C9E2782B5DB0B2009CAD4C /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
 		26C9E27A2B5DB0E7009CAD4C /* HomeViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+TableView.swift"; sourceTree = "<group>"; };
 		26C9E2812B5E723F009CAD4C /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		26C9E2832B5E83F3009CAD4C /* ItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				26C9E2662B5D7775009CAD4C /* AsyncUIImageView.swift */,
+				26C9E2832B5E83F3009CAD4C /* ItemImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				26C9E2822B5E723F009CAD4C /* ItemDetailViewController.swift in Sources */,
 				26C9E2512B5C17EF009CAD4C /* Category.swift in Sources */,
 				26C9E2472B5BEC08009CAD4C /* ListItemCell.swift in Sources */,
+				26C9E2842B5E83F3009CAD4C /* ItemImageView.swift in Sources */,
 				26C9E25A2B5D1C62009CAD4C /* URSessionHTTPClient.swift in Sources */,
 				26C9E2772B5D9536009CAD4C /* Bundle.swift in Sources */,
 				26C9E2692B5D77C6009CAD4C /* UIView.swift in Sources */,

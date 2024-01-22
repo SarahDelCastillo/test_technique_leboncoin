@@ -8,9 +8,8 @@
 import UIKit
 
 class ItemDetailViewController: UIViewController {
-    private let imageView = AsyncUIImageView(forAutoLayout: true)
+    private let itemImageView = ItemImageView(forAutoLayout: true)
     private var imageLoadingTask: Task<Void, Error>?
-    private let urgentLabel = UILabel(forAutoLayout: true)
     private let dateLabel = UILabel(forAutoLayout: true)
     private let titleTextView = UITextView(forAutoLayout: true)
     private let priceLabel = UILabel(forAutoLayout: true)
@@ -21,7 +20,6 @@ class ItemDetailViewController: UIViewController {
         view.backgroundColor = .white
         
         setupImageView()
-        setupUrgentLabel()
         setupTitleLabel()
         setupPriceLabel()
         setupDateLabel()
@@ -29,12 +27,8 @@ class ItemDetailViewController: UIViewController {
     }
 
     func setupWithItem(_ item: ListItem) {
-        if let imageURL = item.image {
-            imageLoadingTask = imageView.load(from: imageURL)
-        } else {
-            imageView.image = UIImage(named: "placeholder")
-        }
-        urgentLabel.isHidden = !item.urgent
+        itemImageView.imageURL = item.image
+        itemImageView.urgent = item.urgent
         dateLabel.text = item.date
         titleTextView.text = item.title
         priceLabel.text = formattedPrice(price: item.price)
@@ -53,34 +47,13 @@ class ItemDetailViewController: UIViewController {
     }
 
     private func setupImageView() {
-        view.addSubview(imageView)
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-
-        let aspectRatio = NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: imageView, attribute: .height, multiplier: 2, constant: 0)
-        imageView.addConstraint(aspectRatio)
+        view.addSubview(itemImageView)
 
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
+            itemImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            itemImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            itemImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
 
-        ])
-    }
-
-    private func setupUrgentLabel() {
-        view.addSubview(urgentLabel)
-        urgentLabel.backgroundColor = .cyan
-        urgentLabel.layer.cornerRadius = 8
-        urgentLabel.clipsToBounds = true
-        urgentLabel.text = " Urgent "
-        urgentLabel.textColor = .black
-        urgentLabel.font = .systemFont(ofSize: 14, weight: .medium)
-
-        NSLayoutConstraint.activate([
-            urgentLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 8),
-            urgentLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 8),
         ])
     }
 
@@ -102,7 +75,7 @@ class ItemDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            titleTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8)
+            titleTextView.topAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: 8)
         ])
     }
 
