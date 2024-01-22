@@ -22,16 +22,19 @@ final class HomeViewController: UITableViewController {
     private lazy var filterButton = {
         UIBarButtonItem(title: "Catégories", style: .plain, target: self, action: #selector(presentCategoriesSheet))
     }()
+    private let loaderView = LoadingView(forAutoLayout: true)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.feedLoader = FeedLoader()
 
+        setupLoadingView()
         setupTableView()
         setupRefreshControl()
 
         navigationItem.rightBarButtonItem = filterButton
         Task {
+            loaderView.updateState(.loading)
             await self.loadIntoTableView()
         }
     }
@@ -40,8 +43,19 @@ final class HomeViewController: UITableViewController {
         if let (items, categories) = await feedLoader?.loadWithFilter(categoryId: currentFilter) {
             self.items = items
             self.categories = categories
+
+            loaderView.updateState(items.isEmpty ? .noItems : .loaded)
             tableView?.reloadData()
         }
+    }
+
+    private func setupLoadingView() {
+        view.addSubview(loaderView)
+
+        NSLayoutConstraint.activate([
+            loaderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loaderView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
 
     private func setupTableView() {
