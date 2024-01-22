@@ -72,6 +72,12 @@ final class HomeViewController: UITableViewController {
         vc.modalPresentationStyle = .automatic
         present(vc, animated: true)
     }
+
+    func presentDetailView(for item: ListItem) {
+        let vc = ItemDetailViewController()
+        vc.setupWithItem(item)
+        present(vc, animated: true)
+    }
 }
 
 @available(iOS 17, *)

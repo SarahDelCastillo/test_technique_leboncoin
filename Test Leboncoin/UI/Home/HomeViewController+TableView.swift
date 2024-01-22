@@ -22,5 +22,7 @@ extension HomeViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        let item = items[indexPath.row]
+        presentDetailView(for: item)
     }
 }
