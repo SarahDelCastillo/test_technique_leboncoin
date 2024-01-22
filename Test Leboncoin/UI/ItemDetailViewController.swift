@@ -31,19 +31,8 @@ class ItemDetailViewController: UIViewController {
         itemImageView.urgent = item.urgent
         dateLabel.text = item.date
         titleTextView.text = item.title
-        priceLabel.text = formattedPrice(price: item.price)
+        priceLabel.text = item.price.asFormattedPrice
         descriptionTextView.text = item.description
-    }
-
-    private func formattedPrice(price: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-
-        return if let formattedPrice = numberFormatter.string(from: NSNumber(value: price)) {
-            "\(formattedPrice) €"
-        } else {
-            ""
-        }
     }
 
     private func setupImageView() {

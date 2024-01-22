@@ -26,22 +26,11 @@ final class ListItemCell: UITableViewCell {
 
     func setupContent(with item: ListItem) {
         titleLabel.text = item.title
-        priceLabel.text = formattedPrice(price: item.price)
+        priceLabel.text = item.price.asFormattedPrice
         categoryLabel.text = item.category
         dateLabel.text = item.date
         itemImageView.imageURL = item.image
         itemImageView.urgent = item.urgent
-    }
-
-    private func formattedPrice(price: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-
-        return if let formattedPrice = numberFormatter.string(from: NSNumber(value: price)) {
-            "\(formattedPrice) €"
-        } else {
-            ""
-        }
     }
 
     private func setupImageView() {
