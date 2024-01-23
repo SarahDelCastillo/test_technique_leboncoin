@@ -18,7 +18,7 @@ final class CategoriesList: UIViewController {
 
     override func viewDidLoad() {
         self.title = "Catégories"
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
 
         categories = loadCategories?() ?? []
         setupTitleLabel()
