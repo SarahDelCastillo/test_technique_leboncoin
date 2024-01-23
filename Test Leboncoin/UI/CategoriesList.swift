@@ -11,10 +11,11 @@ final class CategoriesList: UIViewController {
     private let titleLabel = UILabel(forAutoLayout: true)
     private let tableView = UITableView(forAutoLayout: true)
     private var categories = [Category]()
+    private let clearButton = UIButton(forAutoLayout: true)
 
-    var didSelectCategory: ((Int) -> ())?
+    var didSelectCategory: ((Int?) -> ())?
     var loadCategories: (() -> [Category])?
-
+    var currentCategory: Int?
 
     override func viewDidLoad() {
         self.title = "Catégories"
@@ -23,6 +24,7 @@ final class CategoriesList: UIViewController {
         categories = loadCategories?() ?? []
         setupTitleLabel()
         setupTableView()
+        setupClearButton()
     }
 
     private func setupTitleLabel() {
@@ -32,7 +34,7 @@ final class CategoriesList: UIViewController {
 
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
     }
 
@@ -42,11 +44,31 @@ final class CategoriesList: UIViewController {
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            tableView.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 1),
-            tableView.bottomAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: view.bottomAnchor, multiplier: 1)
+            tableView.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 1)
         ])
+    }
+
+    private func setupClearButton() {
+        view.addSubview(clearButton)
+        // For some reason the button title color is white, hence the need to set it manually here
+        clearButton.setTitleColor(.orange, for: .normal)
+        clearButton.setTitleColor(.gray, for: .highlighted)
+        
+        clearButton.setTitle("Effacer", for: .normal)
+        clearButton.addTarget(self, action: #selector(clearFilter), for: .touchUpInside)
+
+        NSLayoutConstraint.activate([
+            clearButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 8),
+            clearButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    @objc private func clearFilter() {
+        didSelectCategory?(nil)
+        dismiss(animated: true)
     }
 }
 
@@ -62,6 +84,7 @@ extension CategoriesList: UITableViewDataSource, UITableViewDelegate {
 
         var contentConfiguration = cell.defaultContentConfiguration()
         contentConfiguration.text = categories[indexPath.row].name
+        contentConfiguration.image = categories[indexPath.row].id == currentCategory ? .checkmark : nil
         cell.contentConfiguration = contentConfiguration
         return cell
     }
@@ -78,6 +101,7 @@ extension CategoriesList: UITableViewDataSource, UITableViewDelegate {
 #Preview {
     let categoriesList = {
         let categoriesList = CategoriesList()
+        categoriesList.currentCategory = 1
         categoriesList.loadCategories = {
             [
                 .init(id: 0, name: "Immobilier"),
