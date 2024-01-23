@@ -49,6 +49,7 @@ final class HomeViewController: UITableViewController {
 
             loaderView.updateState(items.isEmpty ? .noItems : .loaded)
             tableView?.reloadData()
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 
