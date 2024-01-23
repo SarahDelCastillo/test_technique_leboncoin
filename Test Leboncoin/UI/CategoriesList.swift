@@ -15,7 +15,7 @@ final class CategoriesList: UIViewController {
 
     var didSelectCategory: ((Int?) -> ())?
     var loadCategories: (() -> [Category])?
-
+    var currentCategory: Int?
 
     override func viewDidLoad() {
         self.title = "Catégories"
@@ -34,7 +34,7 @@ final class CategoriesList: UIViewController {
 
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
     }
 
@@ -44,7 +44,7 @@ final class CategoriesList: UIViewController {
         view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             tableView.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 1)
         ])
@@ -84,6 +84,7 @@ extension CategoriesList: UITableViewDataSource, UITableViewDelegate {
 
         var contentConfiguration = cell.defaultContentConfiguration()
         contentConfiguration.text = categories[indexPath.row].name
+        contentConfiguration.image = categories[indexPath.row].id == currentCategory ? .checkmark : nil
         cell.contentConfiguration = contentConfiguration
         return cell
     }
@@ -100,6 +101,7 @@ extension CategoriesList: UITableViewDataSource, UITableViewDelegate {
 #Preview {
     let categoriesList = {
         let categoriesList = CategoriesList()
+        categoriesList.currentCategory = 1
         categoriesList.loadCategories = {
             [
                 .init(id: 0, name: "Immobilier"),

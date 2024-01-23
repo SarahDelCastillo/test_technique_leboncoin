@@ -91,6 +91,7 @@ final class HomeViewController: UITableViewController {
         vc.loadCategories = { [weak self] in
             self?.categories ?? []
         }
+        vc.currentCategory = currentFilter
         vc.didSelectCategory = { [weak self] categoryId in
             self?.currentFilter = categoryId
             self?.updateTitle()
