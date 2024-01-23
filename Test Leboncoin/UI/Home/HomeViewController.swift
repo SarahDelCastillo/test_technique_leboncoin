@@ -35,12 +35,14 @@ final class HomeViewController: UITableViewController {
 
         navigationItem.rightBarButtonItem = filterButton
         Task {
-            loaderView.updateState(.loading)
             await self.loadIntoTableView()
         }
     }
 
     private func loadIntoTableView() async {
+        loaderView.updateState(.loading)
+        items = []
+        tableView.reloadData()
         if let (items, categories) = await feedLoader?.loadWithFilter(categoryId: currentFilter) {
             self.items = items
             self.categories = categories
