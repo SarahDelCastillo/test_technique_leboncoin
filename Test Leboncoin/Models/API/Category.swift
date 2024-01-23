@@ -15,3 +15,9 @@ extension [Category] {
         self.first { $0.id == id }?.name
     }
 }
+
+extension [Category] {
+    func toDict() -> [Int: String] {
+        Dictionary(uniqueKeysWithValues: self.map { ($0.id, $0.name) })
+    }
+}

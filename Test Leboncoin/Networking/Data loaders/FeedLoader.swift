@@ -45,14 +45,15 @@ final class FeedLoader {
     }
 
     private func mapToListItem(items: [APIItem], categories: [Category]) -> [ListItem] {
-        items.sorted().map { item in
+        let categoriesDictionary = categories.toDict()
+        return items.sorted().map { item in
             let imageURL: URL? = if let urlString = item.imagesUrl["thumb"] {
                 URL(string: urlString)
             } else {
                 nil
             }
 
-            let category = categories.first { $0.id == item.categoryId }?.name ?? "Inconnue"
+            let category = categoriesDictionary[item.categoryId] ?? "Inconnue"
             let dateString: String = if let date = item.creationDateExtracted {
                 DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .short)
             } else {
@@ -74,18 +75,12 @@ private extension [APIItem] {
     func sorted() -> Self {
         var sorted = self
         sorted.sort {
-            if let date1 = $0.creationDateExtracted, let date2 = $1.creationDateExtracted {
-                // Both items have a date, compare them
-                if $0.isUrgent != $1.isUrgent {
-                    return $0.isUrgent // If one item is urgent and the other is not, prioritize the urgent one
-                } else {
-                    return date1 < date2 // Sort by date for both urgent and non-urgent items
-                }
-            } else if $0.creationDateExtracted != nil {
-                // item1 has a date, prioritize it
-                return true
+            if $0.isUrgent != $1.isUrgent {
+                return $0.isUrgent
             } else {
-                // item2 has a date or both have nil dates, prioritize item2
+                if let date1 = $0.creationDateExtracted, let date2 = $1.creationDateExtracted {
+                    return date1 < date2
+                }
                 return false
             }
         }
