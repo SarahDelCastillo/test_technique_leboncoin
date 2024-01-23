@@ -9,3 +9,9 @@ struct Category: Decodable {
     var id: Int
     var name: String
 }
+
+extension [Category] {
+    func categoryName(for id: Int) -> String? {
+        self.first { $0.id == id }?.name
+    }
+}

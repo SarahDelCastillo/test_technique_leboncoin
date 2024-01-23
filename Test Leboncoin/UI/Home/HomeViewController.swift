@@ -31,6 +31,7 @@ final class HomeViewController: UITableViewController {
         setupLoadingView()
         setupTableView()
         setupRefreshControl()
+        updateTitle()
 
         navigationItem.rightBarButtonItem = filterButton
         Task {
@@ -46,6 +47,14 @@ final class HomeViewController: UITableViewController {
 
             loaderView.updateState(items.isEmpty ? .noItems : .loaded)
             tableView?.reloadData()
+        }
+    }
+
+    private func updateTitle() {
+        if let currentFilter {
+            title = categories.categoryName(for: currentFilter)
+        } else {
+            title = "Tout"
         }
     }
 
@@ -82,6 +91,7 @@ final class HomeViewController: UITableViewController {
         }
         vc.didSelectCategory = { [weak self] categoryId in
             self?.currentFilter = categoryId
+            self?.updateTitle()
         }
         vc.modalPresentationStyle = .automatic
         present(vc, animated: true)
