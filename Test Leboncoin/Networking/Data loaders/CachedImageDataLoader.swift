@@ -21,7 +21,7 @@ final class CachedImageDataLoader {
         }
 
         do {
-            let (data, response) = try await httpClient.get(from: url)
+            let (data, response) = try await httpClient.get(from: url).value
             guard let imageData = handleClientResponse(data: consume data, response: response) else { return nil }
 
             cache[url] = imageData

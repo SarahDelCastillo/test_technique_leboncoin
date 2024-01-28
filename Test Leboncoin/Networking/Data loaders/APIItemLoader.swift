@@ -18,7 +18,7 @@ final class APIItemLoader {
         guard let url = URL(string: PlistValues.itemsURL) else { return [] }
 
         do {
-            let (data, _) = try await client.get(from: url)
+            let (data, _) = try await client.get(from: url).value
             
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase

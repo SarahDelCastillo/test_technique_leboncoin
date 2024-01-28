@@ -14,7 +14,9 @@ final class URLSessionHTTPClient: HTTPClient {
         self.session = session
     }
 
-    func get(from url: URL) async throws -> (Data, URLResponse) {
-        try await session.data(from: url)
+    func get(from url: URL) -> Task<(Data, URLResponse), Error> {
+        Task {
+            try await session.data(from: url)
+        }
     }
 }

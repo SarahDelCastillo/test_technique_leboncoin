@@ -80,12 +80,14 @@ final class MockHTTPClient: HTTPClient {
         self.response = response
     }
 
-    func get(from url: URL) async throws -> (Data, URLResponse) {
-        Self.receivedMessages.append(.getFromURL)
-        if let error = Self.error {
-            throw error
-        } else {
-            return (Self.data, Self.response)
+    func get(from url: URL) -> Task<(Data, URLResponse), Error> {
+        Task {
+            Self.receivedMessages.append(.getFromURL)
+            if let error = Self.error {
+                throw error
+            } else {
+                return (Self.data, Self.response)
+            }
         }
     }
 }
