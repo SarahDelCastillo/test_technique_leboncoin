@@ -7,6 +7,9 @@
 
 import Foundation
 
+private typealias CategoryLoader = DataLoader<[Category]>
+private typealias APIItemLoader = DataLoader<[APIItem]>
+
 final class FeedLoader {
     private let categoryLoader: CategoryLoader
     private let apiItemLoader: APIItemLoader
@@ -16,8 +19,8 @@ final class FeedLoader {
 
     init() {
         let client = URLSessionHTTPClient(session: .shared)
-        self.categoryLoader = CategoryLoader(client: client)
-        self.apiItemLoader = APIItemLoader(client: client)
+        self.categoryLoader = CategoryLoader(client: client, map: DataMapper.map)
+        self.apiItemLoader = APIItemLoader(client: client, map: DataMapper.map)
     }
 
     func loadWithFilter(categoryId: Int?) async -> ([ListItem], [Category]) {
@@ -35,12 +38,21 @@ final class FeedLoader {
     }
 
     private func loadAPIItems() async -> [APIItem] {
-        apiItems = apiItems.isEmpty ? await apiItemLoader.loadData() : apiItems
+        // Return cached items
+        // For the moment, cache is never invalidated. In a production app, this cache should be invalidated at some point.
+        guard apiItems.isEmpty else { return apiItems }
+        guard let itemsURL = URL(string: PlistValues.itemsURL) else { return [] }
+        
+        apiItems = (try? await apiItemLoader.loadData(from: itemsURL)) ?? []
         return apiItems
     }
 
     private func loadCategories() async -> [Category] {
-        categories = categories.isEmpty ? await categoryLoader.loadData() : categories
+        // Return cached items
+        // For the moment, cache is never invalidated. In a production app, this cache should be invalidated at some point.
+        guard categories.isEmpty else { return categories }
+        guard let categoriesURL = URL(string: PlistValues.categoriesURL) else { return [] }
+        categories = (try? await categoryLoader.loadData(from: categoriesURL)) ?? []
         return categories
     }
 
@@ -54,11 +66,8 @@ final class FeedLoader {
             }
 
             let category = categoriesDictionary[item.categoryId] ?? "Inconnue"
-            let dateString: String = if let date = item.creationDateExtracted {
-                DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .short)
-            } else {
-                ""
-            }
+
+            let dateString = DateFormatter.localizedString(from: item.creationDate, dateStyle: .medium, timeStyle: .short)
 
             return .init(title: item.title,
                          description: item.description,
@@ -78,10 +87,7 @@ private extension [APIItem] {
             if $0.isUrgent != $1.isUrgent {
                 return $0.isUrgent
             } else {
-                if let date1 = $0.creationDateExtracted, let date2 = $1.creationDateExtracted {
-                    return date1 < date2
-                }
-                return false
+                return $0.creationDate < $1.creationDate
             }
         }
         return sorted

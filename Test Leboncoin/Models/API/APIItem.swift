@@ -14,15 +14,6 @@ struct APIItem: Decodable {
     var description: String
     var price: Double
     var imagesUrl: [String: String]
-    var creationDate: String
+    var creationDate: Date
     var isUrgent: Bool
-}
-
-extension APIItem {
-    var creationDateExtracted: Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateFormatter.locale = Locale.current
-        return dateFormatter.date(from: creationDate)
-    }
 }
