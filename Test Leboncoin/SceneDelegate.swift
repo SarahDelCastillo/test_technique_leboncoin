@@ -11,6 +11,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private lazy var httpClient: HTTPClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    private lazy var feedLoader = RemoteFeedLoader(client: httpClient)
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
 
@@ -22,6 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     lazy var navigationController = {
         let rootVC = HomeViewController()
+        rootVC.loadWithFilter = feedLoader.loadWithFilter
         return UINavigationController(rootViewController: rootVC)
     }()
 }

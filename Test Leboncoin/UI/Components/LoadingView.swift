@@ -12,6 +12,7 @@ final class LoadingView: UIView {
         case loading
         case loaded
         case noItems
+        case error
     }
 
     private let loader = UIActivityIndicatorView(forAutoLayout: true)
@@ -39,6 +40,9 @@ final class LoadingView: UIView {
         case .loaded:
             loader.stopAnimating()
             titleLabel.isHidden = true
+        case .error:
+            loader.stopAnimating()
+            titleLabel.text = "Erreur lors du chargement"
         }
     }
 

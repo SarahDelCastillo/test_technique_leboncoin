@@ -10,7 +10,7 @@ import UIKit
 final class HomeViewController: UITableViewController {
     private(set) var items = [ListItem]()
 
-    private var feedLoader: FeedLoader?
+    var loadWithFilter: ((_ categoryId: Int?) async throws -> ([ListItem], [Category]))?
     private var categories = [Category]()
     private var currentFilter: Int? {
         didSet {
@@ -26,7 +26,6 @@ final class HomeViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.feedLoader = FeedLoader()
 
         setupLoadingView()
         setupTableView()
@@ -40,10 +39,16 @@ final class HomeViewController: UITableViewController {
     }
 
     private func loadIntoTableView() async {
+        guard let loadWithFilter else {
+            loaderView.updateState(.error)
+            return
+        }
+
         loaderView.updateState(.loading)
         items = []
         tableView.reloadData()
-        if let (items, categories) = await feedLoader?.loadWithFilter(categoryId: currentFilter) {
+        do {
+            let (items, categories) = try await loadWithFilter(currentFilter)
             self.items = items
             self.categories = categories
 
@@ -52,6 +57,8 @@ final class HomeViewController: UITableViewController {
             
             guard !self.items.isEmpty else { return }
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        } catch {
+            loaderView.updateState(.error)
         }
     }
 
@@ -112,5 +119,9 @@ final class HomeViewController: UITableViewController {
 
 @available(iOS 17, *)
 #Preview {
-    UINavigationController(rootViewController: HomeViewController())
+    let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    let remoteFeedLoader = RemoteFeedLoader(client: client)
+    let rootVC = HomeViewController()
+    rootVC.loadWithFilter = remoteFeedLoader.loadWithFilter
+    return UINavigationController(rootViewController: HomeViewController())
 }

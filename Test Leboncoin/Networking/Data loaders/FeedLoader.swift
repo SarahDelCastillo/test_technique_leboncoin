@@ -10,49 +10,53 @@ import Foundation
 private typealias CategoryLoader = DataLoader<[Category]>
 private typealias APIItemLoader = DataLoader<[APIItem]>
 
-final class FeedLoader {
+protocol FeedLoader {
+    func loadWithFilter(categoryId: Int?) async throws -> ([ListItem], [Category])
+}
+
+final class RemoteFeedLoader: FeedLoader {
     private let categoryLoader: CategoryLoader
     private let apiItemLoader: APIItemLoader
 
     private var apiItems = [APIItem]()
     private var categories = [Category]()
 
-    init() {
-        let client = URLSessionHTTPClient(session: .shared)
+    init(client: HTTPClient) {
         self.categoryLoader = CategoryLoader(client: client, map: DataMapper.map)
         self.apiItemLoader = APIItemLoader(client: client, map: DataMapper.map)
     }
 
-    func loadWithFilter(categoryId: Int?) async -> ([ListItem], [Category]) {
+    func loadWithFilter(categoryId: Int?) async throws -> ([ListItem], [Category]) {
         async let apiItems = await loadAPIItems()
         async let categories = await loadCategories()
 
+        // Check if there's a filter
         guard let categoryId = categoryId else {
-            return await (mapToListItem(items: apiItems, categories: categories), categories)
+            return try await (mapToListItem(items: apiItems, categories: categories), categories)
         }
 
-        let filteredItems = await apiItems.filter {
+        let filteredItems = try await apiItems.filter {
                 $0.categoryId == categoryId
         }
-        return await (mapToListItem(items: filteredItems, categories: categories), categories)
+        return try await (mapToListItem(items: filteredItems, categories: categories), categories)
     }
 
-    private func loadAPIItems() async -> [APIItem] {
+    private func loadAPIItems() async throws -> [APIItem] {
         // Return cached items
         // For the moment, cache is never invalidated. In a production app, this cache should be invalidated at some point.
         guard apiItems.isEmpty else { return apiItems }
         guard let itemsURL = URL(string: PlistValues.itemsURL) else { return [] }
         
-        apiItems = (try? await apiItemLoader.loadData(from: itemsURL)) ?? []
+        apiItems = try await apiItemLoader.loadData(from: itemsURL)
         return apiItems
     }
 
-    private func loadCategories() async -> [Category] {
+    private func loadCategories() async throws -> [Category] {
         // Return cached items
         // For the moment, cache is never invalidated. In a production app, this cache should be invalidated at some point.
         guard categories.isEmpty else { return categories }
         guard let categoriesURL = URL(string: PlistValues.categoriesURL) else { return [] }
-        categories = (try? await categoryLoader.loadData(from: categoriesURL)) ?? []
+        categories = try await categoryLoader.loadData(from: categoriesURL)
         return categories
     }
 
