@@ -57,7 +57,7 @@ final class MapperTests: XCTestCase {
         let data = "invalid".data(using: .utf8)!
 
         do {
-            let result = try sut(data, okResponse)
+            _ = try sut(data, okResponse)
             XCTFail("Should have failed")
         } catch {
             XCTAssertEqual(error as! MapperError, .invalidData)
