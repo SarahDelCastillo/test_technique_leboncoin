@@ -46,3 +46,6 @@ La plupart du code est lisible facilement, mais un peu de documentation pourrait
 
 #### Meilleure gestion des caches
 Dans le cadre de ce projet, les caches sont uniquement stockés en mémoire et n'ont aucune gestion de taille ni de durée. Si le projet devenait plus important, une meilleure gestion de ces derniers serait fortement recommandée.
+
+#### Écoute des évènements réseau
+Il peut y avoir des situations dans lesquelles un utilisateur n'a pas une bonne connexion. Pour une meilleure expérience utilisateur, l'appli pourrait écouter les évènements (connexion/déconnexion) pour charger les éléments au moment où une connexion s'établit, au lieu d'attendre une action de l'utilisateur.
