@@ -23,7 +23,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "GET")
         }
 
-        _ = try await sut.get(from: url)
+        _ = try await sut.get(from: url).value
     }
 
     func test_getFromURL_failsOnRequestError() async {
@@ -34,7 +34,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStub.stub(data: nil, response: nil, error: testError)
 
         do {
-            _ = try await sut.get(from: url)
+            _ = try await sut.get(from: url).value
             XCTFail("Should have failed with error.")
         } catch {
             let receivedError = error as NSError
@@ -52,7 +52,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStub.stub(data: testData, response: testResponse, error: nil)
 
         do {
-            let (data, response) = try await sut.get(from: url)
+            let (data, response) = try await sut.get(from: url).value
             XCTAssertEqual(data, testData)
             XCTAssertEqual(response.url, url)
 
@@ -69,10 +69,27 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStub.stub(data: nil, response: nil, error: nil)
 
         do {
-            let (data, _) = try await sut.get(from: url)
+            let (data, _) = try await sut.get(from: url).value
             XCTAssertEqual(data, emptyData)
         } catch {
             XCTFail("Should not have failed.")
+        }
+    }
+
+    func test_cancelGetFromURLTask_cancelsURLRequest() async {
+        let sut = makeSUT()
+        let url = anyURL()
+
+        URLProtocolStub.stub(data: nil, response: nil, error: nil)
+
+        let task = sut.get(from: url)
+        task.cancel()
+
+        do {
+            _ = try await task.value
+            XCTFail("Should have failed")
+        } catch let error as NSError {
+            XCTAssertEqual(error.code, URLError.cancelled.rawValue)
         }
     }
 
