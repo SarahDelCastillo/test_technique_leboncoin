@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260283F12B66B02B00512992 /* MockHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260283F02B66B02B00512992 /* MockHTTPClient.swift */; };
 		26C9E2152B594E30009CAD4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2142B594E30009CAD4C /* AppDelegate.swift */; };
 		26C9E2172B594E30009CAD4C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2162B594E30009CAD4C /* SceneDelegate.swift */; };
 		26C9E2192B594E30009CAD4C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9E2182B594E30009CAD4C /* HomeViewController.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		260283F02B66B02B00512992 /* MockHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHTTPClient.swift; sourceTree = "<group>"; };
 		26C9E2112B594E30009CAD4C /* Test Leboncoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Leboncoin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C9E2142B594E30009CAD4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26C9E2162B594E30009CAD4C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				26C9E2532B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift */,
 				26C9E25B2B5D1CB5009CAD4C /* URLSessionHTTPClientTests.swift */,
 				26C9E25F2B5D21C4009CAD4C /* Helpers */,
+				260283F02B66B02B00512992 /* MockHTTPClient.swift */,
 			);
 			path = "Test LeboncoinTests";
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26C9E2612B5D22F2009CAD4C /* MemoryLeakTracking.swift in Sources */,
+				260283F12B66B02B00512992 /* MockHTTPClient.swift in Sources */,
 				26C9E2632B5D26B1009CAD4C /* TestHelpers.swift in Sources */,
 				26C9E2542B5D1AFE009CAD4C /* CachedImageDataLoaderTests.swift in Sources */,
 				26C9E25E2B5D21BE009CAD4C /* URLProtocolStub.swift in Sources */,
